@@ -1,0 +1,34 @@
+version: "3"
+
+services:
+  debug-mysql:
+    image: mysql
+    environment:
+      - MYSQL_ROOT_PASSWORD=root # note : DO NOT USE IN PRODUCTION, THIS IS ONLY FOR DEBUGGING
+  
+  debug-myadmin:
+    image: phpmyadmin
+    environment:
+      - PMA_HOST=debug-mysql
+    ports:
+      - 8080:80
+
+  debug-portainer:
+    image: portainer/portainer-ce
+    ports:
+      - 8000:8000
+      - 9000:9000
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - debug-portainer_data:/data
+  
+  debug-docker-hoster:
+    image: dvdarias/docker-hoster
+    volumes:
+      - /var/run/docker.sock:/tmp/docker.sock 
+      - /etc/hosts:/tmp/hosts 
+    
+
+
+volumes:
+  debug-portainer_data:
