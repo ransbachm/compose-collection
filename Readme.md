@@ -24,7 +24,7 @@ docker-compose up -d
 If started you can use
 
 [Portainer (Port 9000)](http://localhost:9000) \
-[Php Myadmin (Port 8080)](http://localhost:8000)
+[Php Myadmin (Port 8080)](http://localhost:8080)
 
 Or get a SQL shell in the container
 
