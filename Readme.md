@@ -3,7 +3,7 @@
 # Installation
 Clone the repo
 ```bash
-git clone ransbachm/mysql_env
+git clone https://github.com/ransbachm/mysql_env/
 ```
 
 # Startup
