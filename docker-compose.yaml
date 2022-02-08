@@ -5,6 +5,8 @@ services:
     image: mysql
     environment:
       - MYSQL_ROOT_PASSWORD=root # note : DO NOT USE IN PRODUCTION, THIS IS ONLY FOR DEBUGGING
+    ports:
+      - 3306:3306
   
   debug-myadmin:
     image: phpmyadmin
