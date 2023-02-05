@@ -1,36 +1,28 @@
 version: "3"
 
 services:
-  debug-mysql:
-    image: mysql
+  db:
+    image: mariadb
     environment:
-      - MYSQL_ROOT_PASSWORD=root # note : DO NOT USE IN PRODUCTION, THIS IS ONLY FOR DEBUGGING
+      - MARIADB_ROOT_PASSWORD=${MARIADB_ROOT_PASSWORD}
     ports:
       - 3306:3306
-  
-  debug-myadmin:
+    volumes:
+      - mariadb:/var/lib/mysql
+
+  myadmin:
     image: phpmyadmin
     environment:
-      - PMA_HOST=debug-mysql
+      - PMA_HOST=db
+      - UPLOAD_LIMIT= "100G"
     ports:
       - 8080:80
 
-  debug-portainer:
-    image: portainer/portainer-ce
-    ports:
-      - 8000:8000
-      - 9000:9000
-    volumes:
-      - /var/run/docker.sock:/var/run/docker.sock
-      - debug-portainer_data:/data
-  
-  debug-docker-hoster:
+  docker-hoster:
     image: dvdarias/docker-hoster
     volumes:
-      - /var/run/docker.sock:/tmp/docker.sock 
-      - /etc/hosts:/tmp/hosts 
-    
-
+      - /var/run/docker.sock:/tmp/docker.sock
+      - /etc/hosts:/tmp/hosts
 
 volumes:
-  debug-portainer_data:
+  mariadb:
